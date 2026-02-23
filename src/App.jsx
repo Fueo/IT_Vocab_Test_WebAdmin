@@ -1,49 +1,42 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-// Import đầy đủ các trang
-import Login from './pages/Login/Login.jsx'; // Cập nhật đường dẫn import nếu cần
-import Dashboard from './pages/Dashboard/Dashboard.jsx';
-import Vocabulary from './pages/Vocabulary/Vocabulary.jsx';
-import Topics from './pages/Topics/Topics.jsx';
-import Questions from './pages/Questions/Questions.jsx';
-import Users from './pages/Users/Users.jsx';
-import Inventory from './pages/Inventory/Inventory.jsx';
-import Feedback from './pages/Feedback/Feedback.jsx';
+import Login from "./pages/Login/Login.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
+import Vocabulary from "./pages/Vocabulary/Vocabulary.jsx";
+import Topics from "./pages/Topics/Topics.jsx";
+import Questions from "./pages/Questions/Questions.jsx";
+import Users from "./pages/Users/Users.jsx";
+import Inventory from "./pages/Inventory/Inventory.jsx";
+import Feedback from "./pages/Feedback/Feedback.jsx";
 
-import './assets/css/styles.css';
+import AdminLayout from "./components/layout/AdminLayout.jsx"; // chỉnh đúng path
+import PrivateRoute from "./components/PrivateRoute.jsx";     // chỉnh đúng path
 
-// ==========================================
-// COMPONENT BẢO VỆ ROUTE (PRIVATE ROUTE)
-// ==========================================
-const PrivateRoute = ({ children }) => {
-  // Kiểm tra xem token có tồn tại trong localStorage không
-  const isAuthenticated = localStorage.getItem('adminAccessToken');
-  
-  // Nếu có token => Cho phép render children (các trang Admin)
-  // Nếu không => Đá về trang /login
-  return isAuthenticated ? children : <Navigate to="/login" replace />;
-};
+import "./assets/css/styles.css";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Route Public: Bất kỳ ai cũng có thể vào xem */}
+        {/* Public */}
         <Route path="/login" element={<Login />} />
 
-        {/* Các Route Private: Phải đăng nhập mới xem được */}
-        {/* Bọc các component bên trong thẻ <PrivateRoute> */}
-        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-        <Route path="/vocabulary" element={<PrivateRoute><Vocabulary /></PrivateRoute>} />
-        <Route path="/topics" element={<PrivateRoute><Topics /></PrivateRoute>} />
-        <Route path="/questions" element={<PrivateRoute><Questions /></PrivateRoute>} />
-        <Route path="/users" element={<PrivateRoute><Users /></PrivateRoute>} />
-        <Route path="/inventory" element={<PrivateRoute><Inventory /></PrivateRoute>} />
-        <Route path="/feedback" element={<PrivateRoute><Feedback /></PrivateRoute>} />
+        {/* Private wrapper */}
+        <Route element={<PrivateRoute />}>
+          {/* Admin layout wrapper */}
+          <Route element={<AdminLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/vocabulary" element={<Vocabulary />} />
+            <Route path="/topics" element={<Topics />} />
+            <Route path="/questions" element={<Questions />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/inventory" element={<Inventory />} />
+            <Route path="/feedback" element={<Feedback />} />
+          </Route>
+        </Route>
 
-        {/* Chuyển hướng mặc định */}
-        {/* Nếu đã vào một route linh tinh, cho về login nếu chưa đăng nhập, hoặc dashboard nếu đã đăng nhập */}
+        {/* Redirect */}
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>

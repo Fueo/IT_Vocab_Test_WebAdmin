@@ -5,7 +5,7 @@ import api from '../../utils/axios';
 /**
  * Sidebar Component
  */
-export default function Sidebar() {
+export default function Sidebar({ collapsed = false }) {
     const navigate = useNavigate();
     const location = useLocation();
     const activePath = location.pathname;
@@ -40,7 +40,7 @@ export default function Sidebar() {
     const getActiveClass = (path) => activePath === path ? 'active' : '';
 
     return (
-        <aside className="sidebar">
+        <aside className={`sidebar ${collapsed ? "collapsed" : ""}`} id="sidebar">
             {/* Header: Logo và tiêu đề */}
             <div className="sidebar-header">
                 <div className="sidebar-logo">

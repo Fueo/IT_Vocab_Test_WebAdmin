@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import AdminLayout from '../../components/layout/AdminLayout';
 import api from '../../utils/axios';
 import Toast from '../../components/common/Toast';
 
@@ -159,7 +158,7 @@ export default function Feedback() {
   };
 
   return (
-    <AdminLayout title="Góp ý & Bảo trì" activePath="/feedback">
+    <>
       <Toast
         show={toast.show}
         message={toast.message}
@@ -604,6 +603,6 @@ export default function Feedback() {
           </div>
         </div>
       </div>
-    </AdminLayout>
+    </>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import AdminLayout from '../../components/layout/AdminLayout';
 
 export default function Vocabulary() {
     // Quản lý Modal: null (đóng), 'add', 'edit', 'import', 'export'
@@ -14,7 +13,7 @@ export default function Vocabulary() {
     const closeModal = () => setActiveModal(null);
 
     return (
-        <AdminLayout title="Quản lý Từ vựng" activePath="/vocabulary">
+        <>
             <div className="card">
                 <div className="card-header card-header-flex">
                     <h2 className="card-title">Quản lý Từ vựng</h2>
@@ -171,6 +170,6 @@ export default function Vocabulary() {
                 </div>
             </div>
 
-        </AdminLayout>
+        </>
     );
 }

@@ -212,6 +212,33 @@ body {
     width: 80px;
 }
 
+.sidebar.collapsed .nav-link {
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.sidebar.collapsed .sidebar-header {
+    justify-content: center;
+}
+
+.sidebar.collapsed .logout-button span {
+    display: none;
+}
+
+.sidebar.collapsed .logout-button {
+    justify-content: center;
+    padding: 0.75rem;
+    /* giảm padding ngang để không bị chật */
+    gap: 0;
+    /* không cần gap vì đã ẩn text */
+}
+
+.sidebar.collapsed .sidebar-footer {
+    padding: 0.75rem;
+    /* tùy chọn: cho footer gọn lại */
+}
+
 .sidebar-header {
     height: 64px;
     border-bottom: 1px solid var(--border);
@@ -348,13 +375,15 @@ body {
 
 .main-content {
     margin-left: 256px;
-    transition: margin-left 0.3s;
+    width: calc(100% - 256px);
+    /* quan trọng: trừ đúng sidebar */
     min-height: 100vh;
-    /* Đã xóa flex: 1; */
+    transition: margin-left 0.3s, width 0.3s;
 }
 
 .sidebar.collapsed+.main-content {
     margin-left: 80px;
+    width: calc(100% - 80px);
 }
 
 .header {

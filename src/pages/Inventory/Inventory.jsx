@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import AdminLayout from '../../components/layout/AdminLayout';
 
 export default function Inventory() {
     const [activeModal, setActiveModal] = useState(null);
@@ -14,7 +13,7 @@ export default function Inventory() {
     const closeModal = () => setActiveModal(null);
 
     return (
-        <AdminLayout title="Quản lý Kho đồ" activePath="/inventory">
+        <>
             
             {/* 4 Thẻ Thống kê */}
             <div className="stats-grid">
@@ -158,6 +157,6 @@ export default function Inventory() {
             {/* Modal Edit (Rút gọn) */}
             {/* Tương tự như Modal Thêm Mới nhưng lấy dữ liệu truyền vào */}
 
-        </AdminLayout>
+        </>
     );
 }

@@ -1,7 +1,6 @@
 // pages/admin/users.jsx (hoặc đúng path file Users của bạn)
 
 import React, { useEffect, useMemo, useState } from 'react';
-import AdminLayout from '../../components/layout/AdminLayout';
 import api from '../../utils/axios';
 import Toast from '../../components/common/Toast';
 
@@ -219,7 +218,7 @@ export default function Users() {
   }, [pagination]);
 
   return (
-    <AdminLayout title="Quản lý Người dùng" activePath="/users">
+    <>
       <Toast
         show={toast.show}
         message={toast.message}
@@ -626,6 +625,6 @@ export default function Users() {
           </div>
         </div>
       </div>
-    </AdminLayout>
+    </>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import AdminLayout from '../../components/layout/AdminLayout';
 
 export default function Topics() {
     // Quản lý Modal: null (đóng), 'add', 'edit', 'import', 'export'
@@ -26,7 +25,7 @@ export default function Topics() {
     const closeModal = () => setActiveModal(null);
 
     return (
-        <AdminLayout title="Quản lý Chủ đề" activePath="/topics">
+        <>
             <div className="card">
                 <div className="card-header card-header-flex">
                     <h2 className="card-title">Quản lý Chủ đề</h2>
@@ -169,6 +168,6 @@ export default function Topics() {
                 </div>
             </div>
             
-        </AdminLayout>
+        </>
     );
 }
