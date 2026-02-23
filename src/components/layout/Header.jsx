@@ -1,6 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Header({ title, toggleSidebar }) {
+    const [user, setUser] = useState({ name: 'Admin', email: 'admin@itvocab.com' });
+
+    useEffect(() => {
+        // Lấy dữ liệu user từ localStorage
+        const storedUser = localStorage.getItem('adminUser');
+        if (storedUser) {
+            try {
+                const parsedUser = JSON.parse(storedUser);
+                // Cập nhật state với dữ liệu thật từ API
+                setUser({
+                    name: parsedUser.fullName || parsedUser.name || 'Admin',
+                    email: parsedUser.email || 'admin@itvocab.com'
+                });
+            } catch (error) {
+                console.error("Lỗi parse user data:", error);
+            }
+        }
+    }, []);
+
     return (
         <header className="header">
             <div className="header-left">
@@ -16,8 +35,9 @@ export default function Header({ title, toggleSidebar }) {
             </div>
             <div className="header-right">
                 <div className="user-info">
-                    <p className="user-name">Admin</p>
-                    <p className="user-email">admin@itvocab.com</p>
+                    {/* Gắn dữ liệu thật vào đây */}
+                    <p className="user-name">{user.name}</p>
+                    <p className="user-email">{user.email}</p>
                 </div>
             </div>
         </header>
